@@ -14,12 +14,12 @@ i{
 }
 
 .card-body{
-    box-shadow:5px 5px 10px 5px rgb(90, 90 ,90, 0.1);
+    box-shadow:5px 5px 10px 5px rgb(90, 90 ,90, 0.12);
     border-radius:5px;
 }
 
 .btn{
-padding:10px !important;
+    padding:10px !important;
 }
 
     

@@ -6,6 +6,7 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\FileController;
 
 Route::get('/',[IndexController::class,'index']);
 
@@ -37,3 +38,5 @@ Route::get('/adm/create', [UserController::class,'edit']);
 Route::put('/adm', [UserController::class,'update']);
 Route::get('/adm/banir', [UserController::class, 'banir']);
 Route::put('/adm/banido', [UserController::class,'delete']);
+
+Route::resource('files', FileController::class);

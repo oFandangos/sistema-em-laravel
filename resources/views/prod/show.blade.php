@@ -16,6 +16,7 @@
                     <p>Autor: <a href="#">{{$user->email ?? 'N/A'}}</a></p>
                     
                     @if(isset($autor) && ($autor->id == $produto->user_id))
+                    @include('files.partials.form')
                     <a href="/produto/edit/{{$produto->id}}" class="btn btn-warning" style="width:100%; margin-top:8px;"><i class="bi bi-pencil-square"></i>Editar Produto</a>
                     <form method="post" action="/produto/{{$produto->id}}">
                     @method('delete')
@@ -30,5 +31,8 @@
         </div>
     </div>
 </div>
+@foreach($produto->files as $file)
+<img style="width:100px;" src="/files/{{$file->id}}">
+@endforeach
 
 @endsection

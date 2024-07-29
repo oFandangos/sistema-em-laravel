@@ -42,7 +42,8 @@ class ProdutoController extends Controller
         $produto->category_id = $request->category_id;
         $produto->user_id = $request->user_id;
         $produto->save();
-        return redirect('/');
+        request()->session()->flash('alert-success','Produto Cadastrado com sucesso!');
+        return redirect("/produto/show/{$produto->id}");
     }
 
     public function edit(Produto $produto, User $user, Category $categories){
@@ -63,12 +64,13 @@ class ProdutoController extends Controller
         $produto->valor_prod = $request->valor_prod;
         $produto->category_id = $request->category_id;
         $produto->save();
-        
-        return redirect('/');
+        request()->session()->flash('alert-success','Produto alterado com sucesso!');
+        return redirect("/produto/show/{$produto->id}");
     }
 
     public function destroy(Produto $produto){
         $produto->delete();
+        request()->session()->flash('alert-success','Produto excluído!');
         return redirect("/");
     }
 }

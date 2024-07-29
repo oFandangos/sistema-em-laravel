@@ -32,7 +32,7 @@ use AuthenticatesUsers;
         $codExists = Auth::user();
 
         if($codExists != false && $codExists->is_banned != true){
-        $cod = $_POST['codpes'];
+        $cod = trim($_POST['codpes']);
         $user = User::where('codpes','LIKE', "%$cod%")->select('name')->first();
         $items = explode(" ", $user->name); //metodo explode: está a separar o nome por espaços.
         $firstName = $items[0]; //pegando o primeiro item: o primeiro nome

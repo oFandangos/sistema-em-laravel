@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Produto;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
 
         //usuário deve ser verdadeiro para poder criar um produto
         Gate::define('create', function (User $user, Produto $produto){
+            return $user->id == true;
+        });
+
+        Gate::define('category', function (User $user){
             return $user->id == true;
         });
 

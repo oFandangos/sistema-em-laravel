@@ -26,4 +26,9 @@ class Produto extends Model
      public function users(){
       return $this->belongsTo('App\Models\User');
      }
+
+     public function files(){
+      return $this->hasMany('App\Models\File');
+     }
+
 }
