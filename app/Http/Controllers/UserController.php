@@ -48,6 +48,7 @@ class UserController extends Controller
 
     }
 
+    #funcao para banir um usuario
     public function delete(UserRequest $request, User $user){
         $user = User::where('codpes', '=', $request->codpes)->first();
         $user->codpes = $request->codpes; //tirar o codpes para impedir o usuario de logar; mostrar mensagem de erro caso tente logar

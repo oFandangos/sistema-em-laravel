@@ -23,7 +23,6 @@ class UserRequest extends FormRequest
     {
         $rules = [
             'codpes' => 'required|integer|codpes',
-            'justificativa' => 'required'
         ];
         return $rules;
     }
@@ -32,7 +31,6 @@ class UserRequest extends FormRequest
         return[
             'codpes.required' => 'Número USP é obrigatório',
             'codpes.integer' => 'Número USP precisa ser um valor inteiro',
-            'justificativa.required' => 'Justifica é obrigatória'
         ];
     }
 }

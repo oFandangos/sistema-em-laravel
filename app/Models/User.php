@@ -18,7 +18,8 @@ class User extends Authenticatable
         'email',
         'password',
         'codpes',
-        'is_admin'
+        'is_admin',
+        'is_banned'
     ];
 
     //pode ser usado para definir, por meio de um select, um admin 
