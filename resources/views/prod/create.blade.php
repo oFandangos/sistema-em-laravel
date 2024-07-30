@@ -12,11 +12,12 @@
             @csrf
             <input type="hidden" name="user_id" class="form-control" placeholder="ID do user" value="{{$userId}}">
             </select>
+            <input type="hidden" name="status" value="em_analise">
             <label for="nome">Nome</label>
             <input type="text" name="nome_prod" class="form-control" placeholder="Nome produto"><br />
             <label for="valor">Valor</label>
             <input type="text" name="valor_prod" class="form-control" placeholder="Insira o valor"><br />
-            <label for="id">ID</label>
+            <label for="id">Categoria</label>
             <!-- <input type="text" name="category_id" placeholder="insira o id"><br /> -->
             <select name="category_id" class="form-control">
                 @foreach($categories::categories() as $category)

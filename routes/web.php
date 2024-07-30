@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\AdminProdController;
+use App\Http\Controllers\AdminAvisoController;
 
 Route::get('/',[IndexController::class,'index']);
 
@@ -34,9 +36,19 @@ Route::delete('/produto/{produto}',[ProdutoController::class,'destroy']);
 
 #criacao de usuario por um admin
 Route::get('/user', [UserController::class,'index']);
-Route::get('/adm/create', [UserController::class,'edit']);
-Route::put('/adm', [UserController::class,'update']);
-Route::get('/adm/banir', [UserController::class, 'banir']);
-Route::put('/adm/banido', [UserController::class,'delete']);
+Route::get('/adm/create/{user}', [UserController::class,'edit']);
+Route::put('/adm/{user}', [UserController::class,'update']);
+Route::get('/adm/banir/{user}', [UserController::class, 'banir']);
+Route::put('/adm/banido/{user}', [UserController::class,'delete']);
+
+#avisos
+Route::get('/adm/avisos', [AdminAvisoController::class,'create']);
+Route::post('/adm/avisos/create', [AdminAvisoController::class,'store']);
+Route::delete('/adm/avisos/delete/{aviso}', [AdminAvisoController::class,'destroy']);
+
+#aprovar produtos
+Route::get('/adm/prod-listar', [AdminProdController::class, 'index']); //form
+Route::put('/adm/aprovar/{produto}', [AdminProdController::class, 'update']); //aprovar ou rejeitar um produto
+Route::put('/adm/reprovar/{produto}', [AdminProdController::class, 'reprovar']);
 
 Route::resource('files', FileController::class);

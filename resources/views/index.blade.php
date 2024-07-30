@@ -2,32 +2,50 @@
 @extends('styles.app')
 @section('content')
 
-@if($userAll != '')
+<!-- @if($userAll != '')
   <a href="/produto/create" class="btn btn-success"><i class="fa fa-edit"></i> Cadastrar produto</a>
   <a href="/cat" class="btn btn-primary"><i class="fa fa-eye"></i> Ver categorias</a>
 @else
 
-@endif
+@endif -->
 <p>Contagem de produtos: {{$prodCount}}</p>
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row">
     <div class="col-md-8">
-      <div class="card-body">
-      @forelse($produtos as $produto)
-      <p>Nome: {{$produto->nome_prod}}</p>
-      <div class="row" style="margin:1px;">
-          <p style="margin-right:3px;">Valor: R$</p>
-          <p class="num"> {{$produto->valor_prod}} </p>
-          </div>
-      <p>Autor: {{$produto->name}} </p>
-      <p>Categoria: {{$produto->category->nome_cat}}</p>
-      <a href="/produto/show/{{$produto->id}}" class="btn btn-outline-primary" style="width:100%;"><i class="fa fa-eye"></i> Visualizar Produto</a>
-      <hr />
+      <div class="card">
+        <div class="card-body">
+        @forelse($produtos as $produto)
+        <p>Nome: {{$produto->nome_prod}}</p>
+        <div class="row" style="margin:1px;">
+            <p style="margin-right:3px;">Valor: R$</p>
+            <p class="num"> {{$produto->valor_prod}} </p>
+            </div>
+        <p>Autor: {{$produto->name}} </p>
+        <p>Categoria: {{$produto->category->nome_cat}}</p>
+        <a href="/produto/show/{{$produto->id}}" class="btn btn-outline-primary" style="width:100%;"><i class="fa fa-eye"></i> Visualizar Produto</a>
+        <hr />
 
-      @empty
-      <p class="text-center text-danger">Não há produtos</p>
+        @empty
+        <p class="text-center text-danger">Não há produtos</p>
 
-      @endforelse
+        @endforelse
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+      <table class="table table-striped">
+        <h3 class="text-center text-muted" style="padding:10px;">Avisos</h3>
+        <tbody>
+          @foreach($avisos as $aviso)
+          <tr>
+            <th>{{$aviso->titulo}}</th>
+          </tr>
+            <td>{{$aviso->texto}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
       </div>
     </div>
   </div>

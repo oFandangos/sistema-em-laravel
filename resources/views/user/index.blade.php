@@ -36,24 +36,41 @@
                 </div>
             </div>
             <hr />
-            @forelse($users as $user)
-                {{$user->name}} -
-                {{$user->codpes}}
-            @if($user->is_admin == 1) - <b class="text-success">ADM</b>
-            @elseif($user->is_banned == 1) - <b class="text-danger">BANIDO</b>
-            @endif
-                <br />
-            @empty
-                Não foram encontrados usuários
-            @endforelse
-            </div>
+
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Usuários</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($users as $user)
+                <tr>
+                <td>
+                    {{$user->name}} - {{$user->codpes}} 
+                    @if($user->is_admin == 1) - <b class="text-success">ADM</b>
+                    @elseif($user->is_banned == 1) - <b class="text-danger">Banido</b>
+                    @endif
+                </td>
+                <td>
+                    <a href="/adm/create/{{$user->id}}" class="btn btn-primary"><i class="bi bi-person-fill-up"></i></a>
+                    <a href="/adm/banir/{{$user->id}}" class="btn btn-danger"><i class="fa fa-hammer" style="margin:5px;"></i></a>
+                </td>
+                <td>
+            @endforeach
+            </tr>
+            </tbody>            
+        </table>
+        </div>
         </div>
         <div class="col-md-4">
             <div class="card-body">
                 <h3 class="text-center">Ações do Administrador</h3>
                 <hr />
-                    <a href="/adm/create" class="btn btn-info">Cadastrar/Remover Administrador</a>
-                    <a href="/adm/banir" class="btn btn-danger">Banir/Desbanir um usuário</a>
+                    <a href="/adm/avisos" class="btn btn-info">Adicionar Avisos</a>
+                    <a href="/adm/prod-listar" class="btn btn-warning">Produtos a serem aceitos</a>
+                    <a href="/cat" class="btn btn-success" id="success">Ver categorias</a>
                 </div>
             </div>
         </div>  
@@ -61,7 +78,6 @@
 </div>
 
 <style>
-
     .col-md-8, .col-md-4{
         margin-top:15px;
     }
@@ -71,9 +87,13 @@
         padding:1.3rem;
         width:70%;
     }
-    .btn-info, .btn-danger{
+    .btn-info, .btn-warning, #success{
         width:100%;
         margin-top:8px;
+    }
+
+    .btn-primary{
+        margin-left:5px;
     }
 
     form{

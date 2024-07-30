@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h2 class="text-center">Banir ou desbanir um usuário</h2>
                 <hr />
-                <form method="post" action="/adm/banido/">
+                <form method="post" action="/adm/banido/{{$user->id}}">
                     @csrf
                     @method('put')
                     <div class="row" style="padding-left:15px; padding-right:15px;">

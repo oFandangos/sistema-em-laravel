@@ -2,9 +2,11 @@
 body{
     background-color:rgb(250, 250, 250) !important;
 }
-button{
-    margin-top:5px;
-}
+
+/* button{
+    margin-top:5px ;
+} */
+
 i{
     margin-right:5px;
 }
@@ -19,7 +21,7 @@ i{
 }
 
 .btn{
-    padding:10px !important;
+    /* padding:10px !important; */
 }
 
     

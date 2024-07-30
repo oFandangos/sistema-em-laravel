@@ -18,9 +18,11 @@ class UserController extends Controller
                 $usersCount = User::where('name','LIKE','%'.$request->search.'%')->count();
             }else{
                 $users = User::all();
+                $admins = User::where('is_admin',TRUE)->get();
                 $usersCount = User::count();
             }
-        return view('user.index', compact('users', 'usersCount'));
+        // return view('user.index', compact('users', 'usersCount'));
+        return view('user.index', ['users' => $users, 'usersCount' => $usersCount, 'admins' => $admins]);
 
         }else{
             request()->session()->flash('alert-danger','Usuário sem permissão');
@@ -45,19 +47,17 @@ class UserController extends Controller
             $user->codpes = $request->codpes;
             $user->is_admin = $request->is_admin;
             $user->save();
-            if($request->is_admin == true){
+            if($user->is_admin == true){
                 request()->session()->flash('alert-success','Usuario cadastrado como admin');
                 return redirect('/user');
             }else{
                 request()->session()->flash('alert-warning',"Administrador do usuário ".$user->name." - ".$user->codpes." removido");
                 return redirect('/user');
-            }
+            }       
         }else{
             request()->session()->flash('alert-warning','Não é possível cadastrar um usuário banido como admin');
             return redirect('/user');
         }
-    
-    
     }
 
     public function banir(Request $request, User $user){

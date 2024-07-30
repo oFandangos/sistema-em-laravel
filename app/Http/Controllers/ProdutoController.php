@@ -42,7 +42,7 @@ class ProdutoController extends Controller
         $produto->category_id = $request->category_id;
         $produto->user_id = $request->user_id;
         $produto->save();
-        request()->session()->flash('alert-success','Produto Cadastrado com sucesso!');
+        request()->session()->flash('alert-success','Produto Cadastrado com sucesso! Esperando análise administrativa.');
         return redirect("/produto/show/{$produto->id}");
     }
 

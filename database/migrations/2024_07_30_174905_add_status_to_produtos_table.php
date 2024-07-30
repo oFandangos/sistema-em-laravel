@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produtos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome_prod')->nullable();
-            $table->string('valor_prod')->nullable();
-            $table->string('justificativa_reprovado')->nullable();
-            $table->timestamps();
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->string('status')->default('em_analise');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtos');
+        Schema::table('produtos', function (Blueprint $table) {
+            //
+        });
     }
 };

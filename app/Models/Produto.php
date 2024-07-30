@@ -31,4 +31,5 @@ class Produto extends Model
       return $this->hasMany('App\Models\File');
      }
 
+
 }
