@@ -52,9 +52,29 @@
             </div>
             </div>
             @empty
-            <div class="alert alert-info">Não há produtos em análise!</div>
+            <div class="alert alert-info">Não há produtos para análise!</div>
             <a href="/user/" class="btn btn-info">Voltar</a>
             @endforelse
+
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center">Reprovados</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    @foreach($produtosReprov as $prod)
+                        <b>Nome do Produto: </b>{{$prod->nome_prod}}</p>
+                        <b>Valor: </b> R${{$prod->valor_prod}}</p>
+                        <b>Autor: </b><a href="">{{$prod->email}}</a></p>
+                        <b>Motivo da Reprovação: </b><p>{{$prod->justificativa_reprovado ?? 'N/A'}}</p></b>
+                        <b>Data reprovação: </b>{{date('d/m/Y', strtotime($prod->updated_at))}}
+                        <hr/>
+                    @endforeach
+                </div>
+            </div>
+            
+            
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -41,18 +42,24 @@ class UserController extends Controller
 
     //atualização de adm
     public function update(UserRequest $request, User $user){
+        $userLogado = Auth::user();
         $user = User::where('codpes', '=', $request->codpes)->first();
         if($user->is_banned == false){
-            $user->codpes = $request->codpes;
-            $user->is_admin = $request->is_admin;
-            $user->save();
-            if($user->is_admin == true){
-                request()->session()->flash('alert-success','Usuario cadastrado como admin');
+            if($user->codpes == $userLogado->codpes){
+                request()->session()->flash('alert-danger','Não é possivel remover o proprio admin');
                 return redirect('/user');
             }else{
-                request()->session()->flash('alert-warning',"Administrador do usuário ".$user->name." - ".$user->codpes." removido");
-                return redirect('/user');
-            }       
+                $user->codpes = $request->codpes;
+                $user->is_admin = $request->is_admin;
+                $user->save();
+                if($user->is_admin == true){
+                    request()->session()->flash('alert-success','Usuario cadastrado como admin');
+                    return redirect('/user');
+                }else{
+                    request()->session()->flash('alert-warning',"Administrador do usuário ".$user->name." - ".$user->codpes." removido");
+                    return redirect('/user');
+                }
+            }
         }else{
             request()->session()->flash('alert-warning','Não é possível cadastrar um usuário banido como admin');
             return redirect('/user');
@@ -72,7 +79,12 @@ class UserController extends Controller
 
     #funcao para banir um usuario
     public function delete(UserRequest $request, User $user){
+        $userLogado = Auth::user();
         $user = User::where('codpes', '=', $request->codpes)->first();
+        if($user->codpes == $userLogado->codpes){
+            request()->session()->flash('alert-danger','Não é possível banir a si mesmo');
+            return redirect('/user');
+        }else{
             $user->codpes = $request->codpes; //tirar o codpes para impedir o usuario de logar; mostrar mensagem de erro caso tente logar
             $user->justificativa = $request->justificativa;
             $user->is_banned = $request->is_banned;
@@ -85,6 +97,7 @@ class UserController extends Controller
                 request()->session()->flash('alert-success','User desbanido');
                 return redirect('/user');
             }
+        }
         
             // request()->session()->flash('alert-warnin','desbaniu');
             // return redirect('/user');

@@ -21,6 +21,7 @@ class IndexController extends Controller
             ->where('nome_prod','LIKE','%'.$request->search.'%')
             ->where('status','LIKE','%aprovado%')
             ->where('nome_cat', $request->nomecategoria)
+            ->orderBy('id','desc')
             ->get();
         }else if(isset($request->search)){
             $produtos = Produto::join('users','produtos.user_id','=','users.id')
@@ -28,6 +29,7 @@ class IndexController extends Controller
             ->select('produtos.*','users.name')
             ->where('nome_prod','LIKE','%'.$request->search.'%')
             ->where('status','LIKE','%aprovado%')
+            ->orderBy('id','desc')
             ->get();
 
         }else if(isset($request->nomecategoria)){
@@ -37,18 +39,20 @@ class IndexController extends Controller
                 ->select('produtos.*','users.name')
                 ->where('nome_cat',$request->nomecategoria)
                 ->where('status','LIKE','%aprovado%')
+                ->orderBy('id','desc')
                 ->get();
             }
         }else{
             $produtos = Produto::join('users','produtos.user_id','=','users.id')
             ->select('produtos.*','users.name')
             ->where('status','LIKE','%aprovado%')
+            ->orderBy('id','desc')
             ->get();
         }
 
         $userAll = Auth::user();
         
-        $avisos = Aviso::orderBy('created_at','desc')->paginate(2);
+        $avisos = Aviso::orderBy('created_at','desc')->paginate(3);
 
         return view('index', [
             'produtos' => $produtos,

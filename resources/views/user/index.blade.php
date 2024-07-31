@@ -40,7 +40,7 @@
                 <td>
                     {{$user->name}} - {{$user->codpes}} 
                     @if($user->is_admin == 1) - <b class="text-success">ADM</b>
-                    @elseif($user->is_banned == 1) - <b class="text-danger">Banido</b>
+                    @elseif($user->is_banned == 1) - <b class="text-danger">BANIDO</b>
                     @endif
                 </td>
                 <td>
@@ -60,9 +60,9 @@
             <div class="card-body">
                 <h3 class="text-center">Ações do Administrador</h3>
                 <hr />
-                    <a href="/adm/avisos" class="btn btn-info">Adicionar Avisos</a>
-                    <a href="/adm/prod-listar" class="btn btn-warning">Produtos a serem aceitos</a>
-                    <a href="/cat" class="btn btn-success" id="success">Ver categorias</a>
+                    <a href="/adm/avisos" class="btn btn-info"><i class="bi bi-plus-circle-fill"></i> Adicionar Avisos</a>
+                    <a href="/adm/prod-listar" class="btn btn-warning"><i class="fa fa-flag"></i> Produtos a serem aceitos</a>
+                    <a href="/cat" class="btn btn-primary" id="success"><i class="bi bi-eye-fill"></i>Ver categorias</a>
                 </div>
             </div>
         </div>  
@@ -85,7 +85,7 @@
     }
 
     .btn-primary{
-        margin-left:5px;
+        
     }
 
     form{

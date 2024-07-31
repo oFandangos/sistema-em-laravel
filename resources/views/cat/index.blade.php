@@ -22,7 +22,7 @@
                 @endforelse
                 </div>
             </div>
-            <a href="/" class="btn btn-warning">Voltar</a>
+            <a href="/user" class="btn btn-warning">Voltar</a>
         </div>
     </div>
 </div>

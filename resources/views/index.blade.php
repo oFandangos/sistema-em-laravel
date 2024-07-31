@@ -82,7 +82,9 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="text-center">Avisos</th>
+          <th>
+            <h3 class="text-center" style="padding:0;">Avisos</h3>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -91,6 +93,7 @@
           <td>
             <b>{{$aviso->titulo}}</b>
             <p>{{$aviso->texto}}</p>
+            <span class="text-muted">{{ date('d/m/Y', strtotime($aviso->created_at)) }}</span>
             </td>
           @endforeach
         </tr>

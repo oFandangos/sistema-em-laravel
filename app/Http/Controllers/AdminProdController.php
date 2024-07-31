@@ -9,8 +9,21 @@ use App\Models\Produto;
 class AdminProdController extends Controller
 {
     public function index(Produto $produtos, User $users){
-        $produtos = Produto::join('users','produtos.user_id','=','users.id')->select('produtos.*', 'users.email')->where('status','like','%em_analise%')->get();
-        return view('user.adm.produtos', ['produtos' => $produtos, 'users' => $users]);
+        $produtos = Produto::join('users','produtos.user_id','=','users.id')
+        ->select('produtos.*', 'users.email')
+        ->where('status','like','%em_analise%')
+        ->get();
+
+        $produtosReprov = Produto::join('users','produtos.user_id','=','users.id')
+        ->select('produtos.*','users.email')
+        ->where('status','like','%reprov%')
+        ->get();
+
+        return view('user.adm.produtos', [
+            'produtos' => $produtos,
+            'produtosReprov' => $produtosReprov,
+            'users' => $users
+        ]);
     }
 
     public function update(Request $request, Produto $produto){

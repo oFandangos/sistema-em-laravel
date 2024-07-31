@@ -35,15 +35,6 @@ $submenu2 = [
     ],
 ];
 
-$submenu3 = [
-
-    [
-        'text' => 'Ver Categorias',
-        'url' => '/cat'
-    ],
-
-];
-
 $submenu4 = [
 
     [
@@ -67,11 +58,6 @@ $menu = [
     [
         'text' => 'Produtos',
         'submenu' => $submenu2,
-        'can' => '',
-    ],
-    [
-        'text' => 'Categorias',
-        'submenu' => $submenu3,
         'can' => '',
     ],
     [
