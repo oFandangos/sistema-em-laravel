@@ -10,7 +10,11 @@
                     <h2 class="text-center">Informações sobre o produto</h2>
                     <hr/> 
                     <p>Nome: {{$produto->nome_prod}}</p>
-                    <p>Valor R$: {{$produto->valor_prod}}</p>
+                    <div class="row" style="margin-left:1px;">
+                        <p style="margin-right:3px;">Valor R$:</p> 
+                        <p class="num">{{$produto->valor_prod}}</p>
+                    </div>
+
                     <p>Categoria: {{$produto->category->nome_cat}}</p>
                     
                     <p>Autor: <a href="#">{{$user->email ?? 'N/A'}}</a></p>
@@ -34,5 +38,22 @@
 @foreach($produto->files as $file)
 <img style="width:100px;" src="/files/{{$file->id}}">
 @endforeach
+
+<script>
+        // Função para formatar número com pontos como separadores de milhar
+        function formatNumber(num) {
+        // Separar parte inteira e decimal
+        let parts = parseInt(num).toFixed(2).split('.');
+        // Adicionar pontos como separadores de milhar
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        // Juntar parte inteira e decimal com vírgula
+        return parts.join();
+    }
+    // Selecionar todas as células de preço e formatar os números
+    document.querySelectorAll('.num').forEach(function(element) {
+        let formattedNumber = formatNumber(element.textContent);
+        element.textContent = formattedNumber;
+    });
+</script>
 
 @endsection

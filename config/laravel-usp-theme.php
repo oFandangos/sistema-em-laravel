@@ -47,7 +47,7 @@ $submenu3 = [
 $submenu4 = [
 
     [
-        'text' => 'Ver Usuários',
+        'text' => 'Área administrativa',
         'url' => '/user'
     ],
 
@@ -75,7 +75,7 @@ $menu = [
         'can' => '',
     ],
     [
-        'text' => 'Usuarios',
+        'text' => 'Admin',
         'submenu' => $submenu4,
         'can' => '',
     ],

@@ -14,15 +14,14 @@ class UserController extends Controller
             // $users = User::all();
             // return view('user.index', compact('users'));
             if(isset($request->search)){
-                $users = User::where('name','LIKE','%'.$request->search.'%')->get();
-                $usersCount = User::where('name','LIKE','%'.$request->search.'%')->count();
+                $users = User::where('name','LIKE','%'.$request->search.'%')->orWhere('codpes','like','%'.$request->search.'%')->get();
+                $usersCount = User::where('name','LIKE','%'.$request->search.'%')->orWhere('codpes','like','%'.$request->search.'%')->count();
             }else{
                 $users = User::all();
-                $admins = User::where('is_admin',TRUE)->get();
                 $usersCount = User::count();
             }
         // return view('user.index', compact('users', 'usersCount'));
-        return view('user.index', ['users' => $users, 'usersCount' => $usersCount, 'admins' => $admins]);
+        return view('user.index', ['users' => $users, 'usersCount' => $usersCount]);
 
         }else{
             request()->session()->flash('alert-danger','Usuário sem permissão');

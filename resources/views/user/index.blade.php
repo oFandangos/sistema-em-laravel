@@ -11,16 +11,6 @@
             </div>
         </div>
     </div>
-
-        <!-- <div class="row">
-            <div class="col-md-4" style="margin-top:15px;">
-                <form method="get" action="/user">
-                    <input type="text" id="search" name="search" value="{{request()->search}}" class="form-control" placeholder="Procurar por usuário">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Procurar</button>
-                </form>
-            </div>
-        </div> -->
-        
 <div class="row">
     <div class="col-md-8">
         <div class="card-body">
@@ -30,7 +20,7 @@
                 </div>
                 <div class="col-8">
                     <form method="get" action="/user">
-                        <input type="text" id="search" name="search" value="{{request()->search}}" class="form-control" placeholder="Procurar por usuário">
+                        <input type="text" id="search" name="search" value="{{request()->search}}" class="form-control" placeholder="Insira o nome ou N. USP">
                         <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Procurar</button>
                     </form>
                 </div>
@@ -45,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
+                @forelse($users as $user)
                 <tr>
                 <td>
                     {{$user->name}} - {{$user->codpes}} 
@@ -58,9 +48,11 @@
                     <a href="/adm/banir/{{$user->id}}" class="btn btn-danger"><i class="fa fa-hammer" style="margin:5px;"></i></a>
                 </td>
                 <td>
-            @endforeach
+            @empty
+            <p class="text-center text-danger">Não foram encontrados usuários</p>
             </tr>
             </tbody>            
+        @endforelse
         </table>
         </div>
         </div>
